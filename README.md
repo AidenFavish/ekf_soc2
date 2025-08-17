@@ -18,3 +18,6 @@ cmake --build build -j
 - All data in `signals.csv` was generated from a MATLAB/Simulink project described here: https://www.mathworks.com/help/simscape-battery/ref/socestimatorkalmanfilter.html
 - The data in `signals_with_est.csv` is the logged output estimate from running `main.cpp`
 - Run `validate_data.py` to see a graph comparing the SOC estimate and the true SOC.
+
+Estimate with initial SOC estimate 10% off from true SOC.
+![](signal_compare.png)
