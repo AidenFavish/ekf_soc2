@@ -13,3 +13,8 @@ cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DCMAKE_EXPORT_COMPILE_COMMANDS=O
 cmake --build build -j
 ./build/ekf_soc_app
 ```
+
+## Test Data
+- All data in `signals.csv` was generated from a MATLAB/Simulink project described here: https://www.mathworks.com/help/simscape-battery/ref/socestimatorkalmanfilter.html
+- The data in `signals_with_est.csv` is the logged output estimate from running `main.cpp`
+- Run `validate_data.py` to see a graph comparing the SOC estimate and the true SOC.

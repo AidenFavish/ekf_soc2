@@ -42,44 +42,33 @@ void writeCSV(const std::string& filename,
               const std::vector<float>& voltage,
               const std::vector<float>& temperature,
               const std::vector<float>& soc,
-              const std::vector<float>& soc_est,
-              const std::vector<float>& x_hat1,
-              const std::vector<float>& x_hat2)
+              const std::vector<float>& soc_est)
 {
     std::ofstream out(filename);
-    out << "Current,Voltage,Temperature,SOC,SOC_Estimate,x_hat1,x_hat2\n";
+    out << "Current,Voltage,Temperature,SOC,SOC_Estimate\n";
     for (size_t i = 0; i < current.size(); i++) {
         out << current[i] << ","
             << voltage[i] << ","
             << temperature[i] << ","
             << soc[i] << ","
-            << soc_est[i] << ","
-            << x_hat1[i] << ","
-            << x_hat2[i] << "\n";
+            << soc_est[i] << "\n";
     }
 }
 
 int main() {
     std::cout << "EKF-SoC running.\n";
 
-    // Matrix test
-    // Matrix A {2, 2, {1, 2, 3, 4}};
-    // Matrix B {2, 2, {5, 6, 7, 8}};
-    // (A * B).transpose().print();
-
-    std::vector<float> current, voltage, temperature, soc, soc_est, x_hat1, x_hat2;
+    std::vector<float> current, voltage, temperature, soc, soc_est;
     readCSV("signals.csv", current, voltage, temperature, soc);
 
     EKF_SOC ekf_soc;
 
     for (int i = 0; i < current.size(); ++i) {
         soc_est.push_back(ekf_soc.get_SOC_estimate());
-        x_hat1.push_back(ekf_soc.get_x_hat1());
-        x_hat2.push_back(ekf_soc.get_x_hat2());
         ekf_soc.step(current[i], voltage[i], temperature[i]);
     }
 
-    writeCSV("signals_with_est.csv", current, voltage, temperature, soc, soc_est, x_hat1, x_hat2);
+    writeCSV("signals_with_est.csv", current, voltage, temperature, soc, soc_est);
 
     std::cout << "EKF-SoC complete.\n";
     return 0;

@@ -57,14 +57,6 @@ public:
         return x(0, 0);
     }
 
-    float get_x_hat1() {
-        return x_hat_k1k(0, 0);
-    }
-
-    float get_x_hat2() {
-        return x_hat_k1k(1, 0);
-    }
-
     void step(float current_meas, float voltage_meas, float temp_meas) {
         input_step(current_meas, voltage_meas);
         prediction_step();
