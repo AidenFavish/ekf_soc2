@@ -21,3 +21,6 @@ cmake --build build -j
 
 Estimate with initial SOC estimate 10% off from true SOC.
 ![](signal_compare.png)
+
+Tuning done in MATLAB and Simulink
+![](matlab_simulink_results.png)
